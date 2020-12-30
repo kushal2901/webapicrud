@@ -66,7 +66,8 @@ namespace webapicrud.Controllers
 
         public ActionResult GetEmpId(int id)
         {
-            IEnumerable<EmpClass> empobj = null;
+            //IEnumerable<EmpClass> empobj = null;
+            EmpClass empobj = null;
             hc.BaseAddress = new Uri("https://localhost:44335/api/");
 
             var consume = hc.GetAsync("crudwebapi?id=" + id.ToString());
@@ -76,22 +77,29 @@ namespace webapicrud.Controllers
 
             if(display.IsSuccessStatusCode)
             {
-                var readdata = display.Content.ReadAsAsync<IList<EmpClass>>();
+                //var readdata = display.Content.ReadAsAsync<IList<EmpClass>>();
+                var readdata = display.Content.ReadAsAsync<EmpClass>();
                 readdata.Wait();
                 empobj = readdata.Result;
+                return View(empobj);
             }
             else
             {
+                return RedirectToAction("GetData");
+            }
+            /*else
+            {
                 empobj = Enumerable.Empty<EmpClass>();
                 ModelState.AddModelError(string.Empty, "No Record Found");
-            }
-            return View(empobj);
+            }*/
+            
         }
 
         
         public ActionResult Update(int id)
         {
-            IEnumerable<EmpClass> empobj = null;
+            //IEnumerable<EmpClass> empobj = null;
+            EmpClass empobj = null;
             hc.BaseAddress = new Uri("https://localhost:44335/api/");
 
             var consume = hc.GetAsync("crudwebapi?id=" + id.ToString());
@@ -101,16 +109,22 @@ namespace webapicrud.Controllers
 
             if (display.IsSuccessStatusCode)
             {
-                var readdata = display.Content.ReadAsAsync<IList<EmpClass>>();
+                //var readdata = display.Content.ReadAsAsync<IList<EmpClass>>();
+                var readdata = display.Content.ReadAsAsync<EmpClass>();
                 readdata.Wait();
                 empobj = readdata.Result;
+                return View(empobj);
             }
             else
             {
+                return RedirectToAction("Getdata");
+            }
+            /*else
+            {
                 empobj = Enumerable.Empty<EmpClass>();
                 ModelState.AddModelError(string.Empty, "No Record Found");
-            }
-            return View(empobj);
+            }*/
+            
         }
 
         [HttpPost]

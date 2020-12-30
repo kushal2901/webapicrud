@@ -140,7 +140,7 @@ namespace webapicrud.Controllers
         [HttpGet]
         public IHttpActionResult idemp(int id)
         {
-            List<EmpClass> ec = new List<EmpClass>();
+            /*List<EmpClass> ec = new List<EmpClass>();
             cmd = new SqlCommand("select * from tbl_emp where no = " + id + "", con);
             con.Open();
             sdr = cmd.ExecuteReader();
@@ -159,7 +159,30 @@ namespace webapicrud.Controllers
             }
             con.Close();
 
-            return Ok(ec);
+            return Ok(ec);*/
+            EmpClass ec = new EmpClass();
+
+            DataTable dt = new DataTable();
+            con.Open();
+            cmd = new SqlCommand("select * from tbl_emp where no = '" + id + "'", con);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            sda.Fill(dt);
+            con.Close();
+            if (dt.Rows.Count == 1)
+            {
+                ec.no = Convert.ToInt32(dt.Rows[0][0].ToString());
+                ec.firstname = dt.Rows[0][1].ToString();
+                ec.lastname = dt.Rows[0][2].ToString();
+                ec.address = dt.Rows[0][3].ToString();
+                ec.contactno = dt.Rows[0][4].ToString();
+                ec.state = dt.Rows[0][5].ToString();
+                return Ok(ec);
+            }
+            else
+            {
+                return Redirect("Getdata");
+            }
+            
         }
         /*public IHttpActionResult getempid(EmpClass empobj)
         {

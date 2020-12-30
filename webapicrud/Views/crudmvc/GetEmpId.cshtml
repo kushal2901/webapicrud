@@ -1,4 +1,4 @@
-﻿@model IEnumerable<webapicrud.Models.EmpClass>
+﻿@model webapicrud.Models.EmpClass
 
 @{
     ViewBag.Title = "GetEmpId";
@@ -29,33 +29,32 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
+    
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.no)
+                @Html.DisplayFor(model => model.no)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.firstname)
+                @Html.DisplayFor(model => model.firstname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.lastname)
+                @Html.DisplayFor(model => model.lastname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.address)
+                @Html.DisplayFor(model => model.address)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.contactno)
+                @Html.DisplayFor(model => model.contactno)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.state)
+                @Html.DisplayFor(model => model.state)
             </td>
             
         </tr>
-    }
+    
 
 </table>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Update", new {  id = Model.no  }) |
+    @Html.ActionLink("Back to List", "Getdata")
 </p>
